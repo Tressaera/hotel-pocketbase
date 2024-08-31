@@ -18,6 +18,12 @@ const config = {
       },
     },
     extend: {
+      colors: {
+        mydark1: "#0E0E0E",
+        mydark2: "#1F1E1E",
+        mylight2: "#FFDD83",
+        mylight1: "#CC8C18",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -31,6 +37,9 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      brightness: {
+        35: '.35',
       },
     },
   },
