@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from './_components/Navbar'
 
+
 interface RouterLayoutProps{
     children:React.ReactNode
 }

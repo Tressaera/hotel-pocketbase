@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import Image from 'next/image'
 import { ModeToggle } from '@/components/ModeToggle'
@@ -5,10 +6,13 @@ import UserToggle from './UserToggle'
 import MobileMenu from './MobileMenu'
 import { NavMenu } from '@/constants'
 import NavItem from './NavItem'
+import { usePathname } from 'next/navigation'
 
 const Navbar = () => {
+  const pathname=usePathname();
+  console.log(pathname)
   return (
-    <div className={'w-full z-20 items-center fixed'}>
+<div className={`w-full z-30 items-center ${pathname !== '/' ? 'bg-mydark2' : 'fixed'}`}>
       <div className='container'>
         <div className='px-4 py-6 flex flex-row items-center justify-center'>
          <div className='w-24 py-4 px-3 rounded-xl bg-white'>
