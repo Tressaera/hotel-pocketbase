@@ -11,6 +11,7 @@ import {
 import { SliderImage } from '@/constants'
 import Image from 'next/image'
 import ImageWaves from '@/components/ImageWaves';
+import HeroForm from './HeroForm';
 
 // import Autoplay from "embla-carousel-autoplay";
 
@@ -43,6 +44,7 @@ const Hero = () => {
         <CarouselPrevious className='hidden lg:flex left-0' />
         <CarouselNext className='hidden lg:flex right-0' />
       </Carousel>
+      <HeroForm/>
     </div>
   );
 };
