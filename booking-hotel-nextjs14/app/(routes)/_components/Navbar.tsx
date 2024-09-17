@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { ModeToggle } from '@/components/ModeToggle'
 import UserToggle from './UserToggle'
@@ -9,10 +9,29 @@ import NavItem from './NavItem'
 import { usePathname } from 'next/navigation'
 
 const Navbar = () => {
-  const pathname=usePathname();
-  console.log(pathname)
+  const pathname = usePathname();
+
+    const [isScroolled, setIsScrolled] = useState(false)
+
+    useEffect(()=>{
+        const handleScroll=()=>{
+            if(window.scrollY >50){
+                setIsScrolled(true);
+            }else
+            {
+                setIsScrolled(false);
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+
+        return()=>{
+            window.removeEventListener('scroll', handleScroll)
+        }
+    },[])
+
   return (
-<div className={`w-full z-30 items-center ${pathname !== '/' ? 'bg-mydark2' : 'fixed'}`}>
+    <div className={`w-full z-30 items-center ${pathname != '/'? 'bg-mydark2' : (isScroolled ? 'bg-mydark2':'bg-transparent')} fixed`}>
       <div className='container'>
         <div className='px-4 py-6 flex flex-row items-center justify-center'>
          <div className='w-24 py-4 px-3 rounded-xl bg-white'>
