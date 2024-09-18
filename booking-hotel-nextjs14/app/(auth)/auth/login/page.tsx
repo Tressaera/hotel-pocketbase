@@ -19,8 +19,9 @@ import { Input } from "@/components/ui/input"
 import { useRouter } from 'next/navigation'
 import { Loader2, Loader2Icon } from 'lucide-react'
 import { Label } from '@/components/ui/label'
-import Link from 'next/link'  //kütüphaneler eklendi
-
+import Link from 'next/link'
+import { useToast } from '@/components/ui/use-toast'
+import { pb } from '@/lib/pocketbase'
 
 const formSchema = z.object({
   email: z.string().min(2, {
@@ -31,9 +32,12 @@ const formSchema = z.object({
   }),
 })
 
-const LoginPage =() =>{
+
+const LoginPage = () => {
+
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,15 +47,41 @@ const LoginPage =() =>{
     },
   })
 
-   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-   setIsLoading(true);
-   console.log(data); // Form verilerini buradan işleyebilirsiniz
-   setIsLoading(false);
+  const onSubmit = async(data: z.infer<typeof formSchema>) => {
 
+    setIsLoading(true)
+    try {
+
+     
+      const record = await pb.collection('users').authWithPassword(
+        data.email, data.password
+      );
+      toast({
+        variant: "success",
+        title: "Login Success",
+      })
+      router.refresh();
+      router.push("/");
+      
+    } catch (error) {
+
+      toast({
+        variant: "destructive",
+        title: "Something went wrong",
+      })
+      
+    }
+    finally{
+      setIsLoading(false)
+    }
+    
+
+   
   }
 
-return(
-  <Form {...form}>
+
+  return (
+    <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-4/5">
         <FormField
           control={form.control}
@@ -74,7 +104,7 @@ return(
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="********" {...field} />
+                <Input type='password' placeholder="********" {...field} />
               </FormControl>
 
               <FormMessage />
@@ -105,7 +135,7 @@ return(
 
       </div>
     </Form>
-)
+  )
 }
-export default LoginPage
 
+export default LoginPage

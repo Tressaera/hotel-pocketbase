@@ -10,6 +10,54 @@ interface AuthLayoutProps {
   children: React.ReactNode
 }
 const AuthLayout = ({ children }: AuthLayoutProps) => {
+
+  const [user, setUser] = useState(null);
+  const router = useRouter();
+  const [isUserLoaded, setIsUserLoaded] = useState(false);
+
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+
+        const authData = localStorage.getItem("pocketbase_auth");
+        if (authData) {
+          const { token, model } = JSON.parse(authData);
+          setUser(model)
+        }
+        
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
+      finally{
+        setIsUserLoaded(true)
+      }
+       
+    }
+    fetchUser();
+  }, [])
+
+  useEffect(()=>{
+    if(isUserLoaded && user && user.email){
+      router.push("/")
+    }
+  },[isUserLoaded, user, router])
+
+  if(!isUserLoaded){
+
+    return(
+      <div className='flex items-center justify-center h-screen'>
+        <Loader2 size={48} className='animate-spin'/>
+
+      </div>
+    )
+  }
+
+  if(user && user.email){
+    return null;
+  }
+
+
   return (
     <div className='h-screen flex justify-center items-center bgone'>
       <div className='hidden lg:block w-1/2 h-full'>
