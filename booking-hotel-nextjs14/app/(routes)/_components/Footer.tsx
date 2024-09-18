@@ -2,14 +2,30 @@ import ImageVawes from '@/components/ImageWaves'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Hotel } from '@/types/types'
 import { PhoneIcon } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 
+interface FooterProps{
+    data:Hotel;
+    loading:boolean;
+}
 
-const Footer = () => {
+const Footer = ({data,loading}:FooterProps) => {
 
-
+    if(loading || !loading && data.length===0 ){
+        return(
+          <div className='relative text-white'>
+             <div className='z-30 absolute inset-0'>
+                <ImageVawes myclassName='absolute -top-5 transform rotate-180' />
+            </div>
+            <div className='z-20 relative h-96'>
+            <Skeleton className='h-full w-full bg-slate-600 '/>
+            </div>
+          </div>
+        )
+      }
 
     return (
         <div className='relative text-white'>
@@ -49,7 +65,7 @@ const Footer = () => {
 
                             </div>
                             <p className='text-gray-400 mt-2'>
-                                Lorem ipsum dolor sit amet.
+                                {data.summary.replace(/<\/?[^>]+(>|$)/g, '')}
                             </p>
 
                         </div>
@@ -58,12 +74,12 @@ const Footer = () => {
                         <div>
                             <h3 className='text-xl font-bold mb-4'>Rooms</h3>
                             <ul className="space-y-2">
-                                <li><a href="#" className="text-gray-400 hover:text-white">Hotel One Suite Turkey Ayvalik Lux Spa Welness</a></li>
-                                <li><a href="#" className="text-gray-400 hover:text-white">Hotel One Suite Turkey Ayvalik Lux Spa Welness</a></li>
-                                <li><a href="#" className="text-gray-400 hover:text-white">Hotel One Suite Turkey Ayvalik Lux Spa Welness</a></li>
-                                <li><a href="#" className="text-gray-400 hover:text-white">Hotel One Suite Turkey Ayvalik Lux Spa Welness</a></li>
-                                <li><a href="#" className="text-gray-400 hover:text-white">Hotel One Suite Turkey Ayvalik Lux Spa Welness</a></li>
-                                <li><a href="#" className="text-gray-400 hover:text-white">Hotel One Suite Turkey Ayvalik Lux Spa Welness</a></li>
+                                <li><a href="#" className="text-gray-400 hover:text-white">Hotel One Suite Turkey Ayvalik Lux Spa Wellness</a></li>
+                                <li><a href="#" className="text-gray-400 hover:text-white">Hotel One Suite Turkey Ayvalik Lux Spa Wellness</a></li>
+                                <li><a href="#" className="text-gray-400 hover:text-white">Hotel One Suite Turkey Ayvalik Lux Spa Wellness</a></li>
+                                <li><a href="#" className="text-gray-400 hover:text-white">Hotel One Suite Turkey Ayvalik Lux Spa Wellness</a></li>
+                                <li><a href="#" className="text-gray-400 hover:text-white">Hotel One Suite Turkey Ayvalik Lux Spa Wellness</a></li>
+                                <li><a href="#" className="text-gray-400 hover:text-white">Hotel One Suite Turkey Ayvalik Lux Spa Wellness</a></li>
                             </ul>
 
                         </div>
@@ -72,9 +88,9 @@ const Footer = () => {
                         <div>
                             <h3 className='text-xl font-bold mb-4'>Contact</h3>
                             <p className='text-gray-400 space-y-2'>
-                                <span className='block'>Global Street vs Turkey Istanbul</span>
-                                <span className='block'>+90 555 333 22 22</span>
-                                <span className='block'>mrtylmz.com</span>
+                                <span className='block'> {data.location}</span>
+                                <span className='block'>{data.contact_phone}</span>
+                                <span className='block'> {data.contact_email}</span>
 
                             </p>
 
@@ -85,7 +101,7 @@ const Footer = () => {
 
                     </div>
                     <div className='text-center mt-8'>
-                        <p className="text-gray-400">Designed By <span className="text-yellow-500">Mert YILMAZ</span></p>
+                        <p className="text-gray-400">Designed By <span className="text-yellow-500">Mert Yılmaz</span></p>
 
                     </div>
                 </div>
