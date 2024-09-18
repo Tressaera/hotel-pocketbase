@@ -1,4 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+
+    images: {
+        domains: ['moon-light.pockethost.io'],
+      },
+      
+};
 
 export default nextConfig;
