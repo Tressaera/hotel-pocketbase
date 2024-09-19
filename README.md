@@ -36,8 +36,30 @@ Projeyi kurmadan önce aşağıdaki yazılımların bilgisayarınıza kurulu old
    ```bash
    npm run dev
 
+# Proje Adı
+
+## Kullanılan Teknolojiler
+
+### Frontend
+
+- **Next.js**: React tabanlı framework.
+- **React**: Kullanıcı arayüzü bileşenlerini oluşturmak için kullanılır.
+- **Tailwind CSS**: Proje stil ve tasarımını yönetmek için kullanılan CSS framework'ü.
+
+### Backend
+
+- **Pocketbase**: JSON tabanlı veritabanı ve backend servisi.
+- **Node.js**: Backend işlemlerini yönetmek için kullanılır.
+
+### Veritabanı
+
+- **SQLite**: Pocketbase tarafından kullanılan veritabanı.
+
 ## Dosya Yapısı
+
 Proje dosya yapısı aşağıdaki gibidir:
+
+```plaintext
 hotel-pocketbase/
 │
 ├── actions/
@@ -58,22 +80,5 @@ hotel-pocketbase/
 ├── public/                    # Statik dosyalar (resimler vb.)
 │
 └── styles/                    # Proje genelindeki stil dosyaları
-
-## Kullanılan Teknolojiler
-
-### Frontend
-
-- **Next.js**: React tabanlı framework.
-- **React**: Kullanıcı arayüzü bileşenlerini oluşturmak için kullanılır.
-- **Tailwind CSS**: Proje stil ve tasarımını yönetmek için kullanılan CSS framework'ü.
-
-### Backend
-
-- **Pocketbase**: JSON tabanlı veritabanı ve backend servisi.
-- **Node.js**: Backend işlemlerini yönetmek için kullanılır.
-
-### Veritabanı
-
-- **SQLite**: Pocketbase tarafından kullanılan veritabanı.
 
    
